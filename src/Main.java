@@ -41,7 +41,7 @@ public class Main {
 				System.out.println(spotify.getPlayList().toString());
 				break;
 			case "2":
-				if (!PlayList.shuffling)
+				if (!PlayList.shuffling.get())
 				{
 					spotify.addAlbum(addCD(scanner));
 				} else

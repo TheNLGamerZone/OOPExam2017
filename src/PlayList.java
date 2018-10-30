@@ -1,13 +1,14 @@
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PlayList {
-	public static boolean shuffling;
+	public static AtomicBoolean shuffling;
 	private List<AudioFile> audioList;
 	private Spotify spotify;
 	
 	public PlayList(List<AudioFile> audioList, Spotify spotify)
 	{
-		shuffling = false;
+		shuffling = new AtomicBoolean();
 		this.audioList = audioList;
 		this.spotify = spotify;
 	}
@@ -54,11 +55,10 @@ public class PlayList {
 	public void shuffle()
 	{
 		// Check if we are already shuffling
-		if (!shuffling)
+		if (shuffling.compareAndSet(false, true))
 		{
 			// If not set flag and start shuffling
 			Shuffler s = new Shuffler(this.audioList);
-			shuffling = true;
 			
 			s.start();
 		}

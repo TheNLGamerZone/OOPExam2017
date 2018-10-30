@@ -17,9 +17,16 @@ public class Shuffler extends Thread
 	 */
 	public void run()
 	{
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Collections.shuffle(list);
 
-		PlayList.shuffling = false;
+		
+		PlayList.shuffling.set(false);
 		System.out.println("Shuffling done.");
 	}
 }
